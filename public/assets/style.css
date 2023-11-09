@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,500;1,800&display=swap');
+
+/* VENDOR CSS */
+@import url('../assets/vendor/bootstrap/css/bootstrap.min.css');
+@import url('../assets/vendor/font-awesome/css/font-awesome.min.css');
+
+@import url('../assets/vendor/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css');
+@import url('../assets/vendor/chartist/css/chartist.min.css');
+@import url('../assets/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.css');
+@import url('../assets/vendor/toastr/toastr.min.css');
+
+
+/* CSS */
+@import url('css/blog.css');
+@import url('css/chatapp.css');
+
+@import url('css/color_skins.css');
+@import url('css/ecommerce.css');
+
+@import url('css/inbox.css');
+@import url('css/main.css');
+
+
+/* USER CSS */
+@import url('user/user.css');

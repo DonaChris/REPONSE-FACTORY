@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginController;
+
 
 
 /*
@@ -15,14 +17,13 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-//d'accueil (home)
-Route::get('/', [HomeController::class, 'home'])
-    ->name('app_home');
+Route::controller(HomeController::class)->group(function () {
+    Route::get('/', 'home')->name('app_home');
+    Route::get('/contact', 'contact')->name('app_contact');
+    Route::match(['get', 'post'], '/dashboard', 'dashboard')->middleware('auth')->name('app_dashboard');
+});
 
-//page contact
-Route::get('/contact', [HomeController::class, 'contact'])
-    ->name('app_contact');
-
-//page dashboard
-Route::match(['get', 'post'], '/dashboard', [HomeController::class, 'dashboard'])
-    ->name('app_dashboard');
+Route::controller(LoginController::class)->group(function () {
+    Route::get('/logout', 'logout')->name('app_logout');
+    Route::post('/existEmail','existEmail')->name('app_existEmail');
+});

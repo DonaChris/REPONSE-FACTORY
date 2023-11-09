@@ -8,18 +8,15 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     //
-    public function home()
-    {
+    public function home() {
         return view('home.home');
     }
 
-    public function contact()
-    {
+    public function contact() {
         return view('home.contact');
     }
 
-    public function dashboard()
-    {
+    public function dashboard() {
         return view('home.dashboard');
     }
 }
