@@ -7,3 +7,4 @@
     @extends('components.nav.sidebar')
 
 @endsection
+

@@ -9,14 +9,14 @@ class HomeController extends Controller
 {
     //
     public function home() {
-        return view('home.home');
+        return view('layouts.home.home');
     }
 
     public function contact() {
-        return view('home.contact');
+        return view('layouts.home.contact');
     }
 
     public function dashboard() {
-        return view('home.dashboard');
+        return view('layouts.home.dashboard');
     }
 }

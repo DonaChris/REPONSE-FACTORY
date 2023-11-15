@@ -12,7 +12,7 @@
     </head>
     <body>
         {{-- Loader-page --}}
-        @include('components.others.loader-page')
+        {{-- @include('components.others.loader-page') --}}
 
         {{-- Navbar --}}
         @include('components.nav.navbar')
