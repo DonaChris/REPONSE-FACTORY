@@ -1,5 +1,7 @@
 <?php
 
+use App\Helpers\Sanitizer;
+use App\Helpers\StatusHelpers;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 
@@ -184,6 +186,8 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
+        'StatusHelpers' => StatusHelpers::class,
+        "Sanitizer" => Sanitizer::class,
     ])->toArray(),
 
 ];

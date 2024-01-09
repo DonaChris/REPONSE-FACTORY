@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\App\HomeController;
+use App\Http\Controllers\Auth\AuthentificationController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\LoginController;
 
 
 
@@ -17,13 +17,47 @@ use App\Http\Controllers\LoginController;
 |
 */
 
-Route::controller(HomeController::class)->group(function () {
-    Route::get('/', 'home')->name('app_home');
-    Route::get('/contact', 'contact')->name('app_contact');
-    Route::match(['get', 'post'], '/dashboard', 'dashboard')->middleware('auth')->name('app_dashboard');
+Route::redirect('', 'app/dashboard');
+Route::redirect('/', 'app/dashboard');
+Route::redirect('/app', 'app/dashboard');
+Route::redirect('/auth', 'auth/connexion');
+
+
+/**
+ *--------------------------------------------------------------------------
+ * Authentification
+ *--------------------------------------------------------------------------
+ */
+
+Route::prefix('auth')->middleware('global.auth')->group(function () {
+    // Login
+    Route::get('connexion', [AuthentificationController::class, 'login'])->name('auth-login');
+    Route::post('connexion', [AuthentificationController::class, 'loginProcess'])->name('auth-login-process');
 });
 
-Route::controller(LoginController::class)->group(function () {
-    Route::get('/logout', 'logout')->name('app_logout');
-    Route::post('/existEmail','existEmail')->name('app_existEmail');
+
+
+
+/**
+ *--------------------------------------------------------------------------
+ * App
+ *--------------------------------------------------------------------------
+ */
+
+Route::prefix("app")->middleware('global.auth')->group(function () {
+
+    // Dashboard
+    Route::get('dashboard', [HomeController::class, 'index'])->name('app-dashboard');
+
+    // welcome (profil dashboard)
+    // Route::prefix('mon-compte')->group(function () {
+    //     Route::get('', [MyAccountAppController::class, 'index'])->name('app-my-account');
+    //     // Update profil
+    //     Route::post('edit-profil-information', [MyAccountAppController::class, 'editProfilProcess'])->name('app-my-account-process');
+    //     // Update password
+    //     Route::post('edit-password', [MyAccountAppController::class, 'editPasswordProcess'])->name('app-my-account-password-process');
+    // });
+
+    // Logout
+    Route::get('deconnexion', [AuthentificationController::class, 'logout'])->name('app-log-out');
 });

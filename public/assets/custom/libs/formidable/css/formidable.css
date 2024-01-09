@@ -1,0 +1,9 @@
+
+.formidabable-input-error {
+    border: 2px solid #dc3545 !important;
+    box-shadow: 0 0 0 0.15rem #dc35463f;
+}
+
+*[data-formidable-errorfor] .error {
+    margin-top: 3px;
+}
