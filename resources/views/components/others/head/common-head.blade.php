@@ -51,4 +51,4 @@
 <link rel="stylesheet" href="{{ asset('custom/libs/cool-step/cool-step.css') }}">
 
 <!-- Custom -->
-<link rel="stylesheet" href="{{ asset('custom/css/common.css?a') }}">
+<link rel="stylesheet" href="{{ asset('custom/css/common.css?c') }}">

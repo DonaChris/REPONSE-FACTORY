@@ -950,15 +950,13 @@ select {
     line-height: 18px;
     width: 100%;
     background-color: transparent;
-    height: 100%;
-    background-color: #eee6da !important;
     background-image: url(../images/svg-icons/arrow-down.svg);
     background-repeat: no-repeat;
     background-position: 96% 18px;
     position: relative;
-    padding: 13px 55px 10px 18px !important;
-    border-radius: 20px !important;
-    border: 1px solid var(--app-gray-light-4);
+    padding: 10px;
+    border-radius: 12px !important;
+    border: 2px solid var(--app-gray-light-4);
 }
 
 .form-group div.error {
@@ -1018,6 +1016,11 @@ select {
 .pagination-bloc .page-item.active .page-link {
     background: var(--app-green-light) !important;
     color: white;
+}
+
+.menu-item.active {
+    background: var(--app-gray-light-1);
+    font-weight: 700;
 }
 
 

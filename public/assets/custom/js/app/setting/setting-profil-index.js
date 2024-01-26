@@ -42,27 +42,19 @@ const SETTING_PROFIL_PASSWORD_CALLBACK = (form, reponse) => {
 
 
 window.addEventListener("DOMContentLoaded", () => {
-    const _token = document.getElementById("_token").value;
-    let userDetail = JSON.parse(document.getElementById('global-user-detail').value);
-    let formProfil = new Formidable("formDetail", ["fullname", "image", "phone", "indicatif-phone", "email", "sexe", "birthday"], "submit");
-    let formPassword = new Formidable("formPassword", ["current-password", "new-password"], "submit-password");
-
-    // init img picker
-    imgPreviewPicker("#btn-change-profil-picture", "#image", ".previewer-img");
-
-    // init phone input
-    getIntlTelInput("phone", userDetail.format.phone.codeIso, userDetail.format.phone.code, userDetail.format.phone.number);
+    const _token = document.getElementById("_token").value
+    let formProfil = new Formidable("formDetail", ["fullname", "email"], "submit")
+    let formPassword = new Formidable("formPassword", ["current-password", "new-password"], "submit-password")
 
     // Quand on soumet le formulaire de  modification de profil
     formProfil.getForm().addEventListener("submit", (event) => {
         event.preventDefault();
         formProfil.removeError();
-        formProfil.updateUI(Formidable.UI_LOADING);
+        formProfil.updateUI(Formidable.UI_LOADING)
         myFullLoader('on');
 
-        let formData = formProfil.getValue("*");
+        let formData = formProfil.getValue("*")
         formData.set("_token", _token);
-        formData.set("phone", document.getElementById("indicatif-phone").value + "_" + formProfil.getValue("phone"));
 
         let config = {
             method: Http.METHOD_POST,
@@ -70,18 +62,18 @@ window.addEventListener("DOMContentLoaded", () => {
             url: jsRoute("app-my-account-process")
         };
 
-        new Http().call(config, SETTING_PROFIL_DETAIL_CALLBACK, formProfil);
+        new Http().call(config, SETTING_PROFIL_DETAIL_CALLBACK, formProfil)
     })
 
     // Quand on soumet le formulaire de  modification de mot de passe
     formPassword.getForm().addEventListener("submit", (event) => {
-        event.preventDefault();
-        formPassword.removeError();
-        formPassword.updateUI(Formidable.UI_LOADING);
-        myFullLoader('on');
+        event.preventDefault()
+        formPassword.removeError()
+        formPassword.updateUI(Formidable.UI_LOADING)
+        myFullLoader('on')
 
-        let formData = formPassword.getValue("*");
-        formData.set("_token", _token);
+        let formData = formPassword.getValue("*")
+        formData.set("_token", _token)
 
         let config = {
             method: Http.METHOD_POST,
@@ -89,6 +81,6 @@ window.addEventListener("DOMContentLoaded", () => {
             url: jsRoute("app-my-account-password-process")
         };
 
-        new Http().call(config, SETTING_PROFIL_PASSWORD_CALLBACK, formPassword);
+        new Http().call(config, SETTING_PROFIL_PASSWORD_CALLBACK, formPassword)
     })
-});
+})

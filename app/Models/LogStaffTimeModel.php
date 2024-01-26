@@ -12,12 +12,11 @@ class LogStaffTimeModel extends Model
     protected $table = 'log-staff-time';
 
     protected $fillable = [
-        'hour_work',
-        'observations',
-        'staff'
+        'total_hour',
+        'total_staff',
+        'total_amount',
+        'observation',
+        'operation_date',
+        'details'
     ];
-
-    public function getStaff() {
-        $this->belongsTo(StaffModel::class, 'staff', 'id');
-    }
 }

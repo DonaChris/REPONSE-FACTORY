@@ -31,15 +31,6 @@ function closeSideBarNav() {
     document.getElementById("sidebar-bloc").style.transform = "translateX(-100%)";
 }
 
-function stopSkeleton(elements) {
-    if (elements != null) {
-        elements.forEach(element => {
-            element.onload = function () {
-                element.classList.remove('app-skelleton', 'app-skelleton-sm', 'app-skelleton-md', 'app-skelleton-lg');
-            };
-        })
-    }
-}
 
 function globalToastify(text, type = "info") {
     Toastify({
@@ -89,19 +80,6 @@ function shareLink(link, title = "") {
     // modal show
     $("#modal-share").modal("show");
 
-}
-
-function initModalInfo(buttons) {
-    let targetButtons = document.querySelectorAll(buttons);
-
-    if (targetButtons != null) {
-        targetButtons.forEach(targetButton => {
-            targetButton.addEventListener('click', () => {
-                // Bind data in model
-                fireModalInfo(targetButton.dataset.modalTitle, targetButton.dataset.modalContent)
-            })
-        })
-    }
 }
 
 function fireModalInfo(title, content) {
@@ -200,28 +178,6 @@ function imgNavigation() {
     }
 }
 
-function mySingature() {
-    // Signed website
-    // =========> Console Signature
-    console.log("%cAVERTISSEMENT %c\nEn utilisant cette console, vous vous exposez au risque que des personnes malveillantes se fassent passer pour vous et volent vos informations grâce à une attaque appelée Self-XSS.\nNe saisissez pas et ne copiez pas du code que vous ne comprenez pas. ", "font-size: 20px; font-weight:bold; color: white; background: red", "font-size: 15px; color:black; font-weight:bold");
-    console.log("\n%cINFORMATIONS LEGALES%c\nPour signaler un probleme ou un disfonctionnement du site, veuillez contacter notre web master%c.\nWEB MASTER: %cDEKOUN Cédric%c \nContact : %chttps://www.linkedin.com/in/dekoun-cedric/", "font-size: 20px; font-weight:bold; color: white; background: green", "font-size: 15px; color:black; font-weight:bold", "font-size: 18px; color: black; font-weight:bold", "font-size: 18px; color: blue; font-weight:bold", "font-size: 18px; color: black; font-weight:bold", "font-size: 18px; color: blue; font-weight:bold");
-}
-
-function seekBarAlert() {
-    const btnSeekBars = document.querySelectorAll(".btn-seekbar");
-    if (btnSeekBars != null) {
-        btnSeekBars.forEach(btnSeekBar => {
-            btnSeekBar.addEventListener("click", () => {
-                if (btnSeekBar.classList.contains("btn-seekbar-active")) {
-                    globalToastify(btnSeekBar.dataset.message);
-                    return
-                }
-                location.href = btnSeekBar.dataset.href;
-            })
-        })
-    }
-}
-
 // init variable
 let skelletonElements = document.querySelectorAll('img.app-skelleton')
 
@@ -243,82 +199,11 @@ setTimeout(() => {
 
 // global when page ready
 $(document).ready(function () {
-    const bottomNavItems = document.querySelectorAll('.bottom-nav-item');
-
     // global variable who indicate if user is connected or not
-    let isAuthentificate = JSON.parse(document.getElementById("is-auth").value);
-
-    // On img load, we remove skeleton animation
-    stopSkeleton(skelletonElements);
-
-    // init modal components
-    initModalInfo(".app-modaler-info-btn");
-
-    // Console signature
-    mySingature();
-
-    // bind btn seekbar type functionality
-    seekBarAlert();
-
-    // restore shopping cart count
-    refreshCartItemIndication();
-
-    // Init like and unlike product functionnality
-    new ProductFavoriteModule((targetProduct) => {
-        // We need to 
-        if (location.href == jsRoute('app-product-favorites')) {
-            targetProduct.remove();
-            if (document.querySelectorAll("div.product-bloc").length < 1) {
-                location.href = location.href
-            }
-        }
-    })
-
-    // Hide toolbar when scroll
-    let toolbarSearchSection = document.querySelector(".menu-toolbar .toolbar-search");
-    if (toolbarSearchSection != null && window.getComputedStyle(toolbarSearchSection, null).display == "block") {
-        navBarCollapse(toolbarSearchSection);
-    }
-
-    // padding top to main div content
-    // to prevent mobile fixed bar to hidden main content
-    let topAppOffset = document.querySelector('.top-app-offset');
-    let searchBarInMobileToolbat = document.querySelector('.menu-toolbar .toolbar-search');
-    if (window.getComputedStyle(searchBarInMobileToolbat, null).display == "none") {
-        topAppOffset.style.padding = "38px";
-    } else {
-        topAppOffset.style.padding = "74px";
-    }
-
-    // Logout
-    let logOutBtns = document.querySelectorAll(".logOutBtn");
-    if (logOutBtns != null) {
-        logOutBtns.forEach((logOutBtn) => {
-            logOutBtn.addEventListener("click", () => {
-                new Maudia().confirmationDialog(
-                    {
-                        title: "Déconnexion",
-                        text: "Voulez-vous vraiment vous déconnecter de votre compte ?",
-                        showCancelButton: true,
-                        confirmButtonColor: "#000000",
-                        cancelButtonColor: "#e85347",
-                        cancelButtonText: "Se déconnecter",
-                        confirmButtonText: "Retour",
-                    },
-                    {
-                        confirm: [() => {
-                            location.href = jsRoute("app-log-out");
-                            myFullLoader('on');
-                        }, {}],
-                        confirmType: Maudia.TYPE_FUNCTION,
-                    }
-                );
-            });
-        });
-    }
+    let isAuthentificate = JSON.parse(document.getElementById("is-auth").value)
 
     // Active menu
-    let menuItems = document.querySelectorAll(".menu-item");
+    let menuItems = document.querySelectorAll(".menu-item")
     let hasFoundMenu = false;
     if (menuItems != null) {
         // check if any menu who has full current url
@@ -336,21 +221,6 @@ $(document).ready(function () {
                 }
             })
         }
-    }
-
-    // Bottom nav
-    if (bottomNavItems != null) {
-        bottomNavItems.forEach(bottomNavItem => {
-            // Bottom nav interaction
-            bottomNavItem.addEventListener('click', () => {
-                location.href = bottomNavItem.dataset.href;
-            })
-            // bottom nav active manu
-            if (location.href.indexOf(bottomNavItem.dataset.href) > -1) {
-                bottomNavItem.classList.add("active");
-            }
-        })
-
     }
 
     // Form action btn
@@ -386,35 +256,4 @@ $(document).ready(function () {
         });
     }
 
-    // Zoom on image initialisation
-    if (document.getElementById("img-to-zoom") != null) {
-        $('#img-to-zoom').zoom();
-    }
-
-    // onclick on btn share
-    let btnShares = document.querySelectorAll(".btn-share");
-    let btnShareLinkTextArea = document.getElementById("share-link-textarea");
-    let btnShareLinkInput = document.getElementById("share-link-input");
-    let btnShareLinkCopy = document.getElementById("share-link-btn-copy");
-
-    if (btnShares != null) {
-        btnShares.forEach(btnShare => {
-            btnShare.addEventListener('click', () => {
-                shareLink(btnShare.dataset.link, btnShare.dataset.title);
-            })
-        })
-    }
-
-    btnShareLinkCopy.onclick = () => {
-        btnShareLinkTextArea.select(); //select input value
-        if (document.execCommand("copy")) { //if the selected text copy
-            btnShareLinkInput.classList.add("active");
-            btnShareLinkCopy.innerText = "✔️ Copié";
-            setTimeout(() => {
-                window.getSelection().removeAllRanges(); //remove selection from document
-                btnShareLinkInput.classList.remove("active");
-                btnShareLinkCopy.innerText = "Copier";
-            }, 3000);
-        }
-    }
 });

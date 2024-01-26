@@ -14,7 +14,7 @@
     @yield('template-header')
 </head>
 
-<body class="preloader-visible theme-color-3 dark" style="overflow-x: hidden">
+<body class="preloader-visible theme-color-3 dark" style="overflow-x: hidden; background:#f4f7f6">
 
     <!-- full ldloader -->
     @include('components.loader.common-ld-loader')
@@ -22,17 +22,23 @@
     <!-- Pre loader -->
     @include('components.pre-loader')
 
-    <!-- Header section -->
-    @include('components.others.toolbar.components-others-toolbar')
+    <div id="wrapper">
 
-    <!-- sidebar section -->
-    @include('components.others.nav.components-others-sidebar')
+        <!-- Header section -->
+        @include('components.others.toolbar.components-others-toolbar')
+
+        <!-- sidebar section -->
+        @include('components.others.nav.components-others-sidebar')
 
 
-    <!-- Main App -->
-    <main class="main main-app-block">
-        @yield('content')
-    </main>
+        <!-- Main App -->
+        <main class="main main-app-block" id="main-content">
+            <div class="container-fluid">
+                @yield('content')
+            </div>
+        </main>
+
+    </div>
 
     <!-- PHP function to JS -->
     @include('components.functions-js')
@@ -52,7 +58,7 @@
     @include('components.others.footer.common-footer-script')
 
     <!-- Common Script to all page -->
-    <script src="{{ asset('custom/js/components/app-common-components.js') }}"></script>
+    <script src="{{ asset('custom/js/components/app-common-components.js?a') }}"></script>
 
 
     <!-- Custom footer script -->
@@ -63,7 +69,10 @@
         <input type="hidden" name="global-user-detail" value="{{ json_encode($sessionUser) }}"
             id="global-user-detail">
     @endif
-    <input type="hidden" id="_token" name="_token" value="{{ csrf_token() }}">
+
+    @if (empty($noBindToken))
+        <input type="hidden" id="_token" name="_token" value="{{ csrf_token() }}">
+    @endif
 </body>
 
 </html>

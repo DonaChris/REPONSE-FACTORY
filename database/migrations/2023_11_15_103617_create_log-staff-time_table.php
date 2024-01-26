@@ -13,11 +13,16 @@ return new class extends Migration
     {
         Schema::create('log-staff-time', function (Blueprint $table) {
             $table->id();
-            $table->time('hour_work');
-            $table->longText('observations')->nullable()->default(null);
 
-            $table->unsignedBigInteger('staff');
-            $table->foreign('staff')->references('id')->on('staff');
+            $table->integer('total_hour')->default(0);
+            $table->integer('total_staff')->default(0);
+            $table->integer('total_amount')->default(0);
+            $table->longText('observation')->nullable()->default(null);
+            $table->date('operation_date');
+            $table->json('details');
+
+            $table->unsignedBigInteger('production');
+            $table->foreign('production')->references('id')->on('production');
 
             $table->timestamps();
         });

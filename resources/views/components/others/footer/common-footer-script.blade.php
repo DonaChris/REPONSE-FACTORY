@@ -15,7 +15,7 @@
 <script src="{{ asset('custom/js/components/toastr-config-components.js') }}"></script>
 
 <!-- Maudia -->
-<script src="{{ asset('custom/libs/maudia/maudia.js') }}"></script>
+<script src="{{ asset('custom/libs/maudia/maudia.js?a') }}"></script>
 
 <!-- Img previewer -->
 <script src="{{ asset('custom/libs/img-previewer/img-preview-picker.js') }}"></script>
@@ -47,19 +47,3 @@
 
 <!-- Coolstep js -->
 <script src="{{ asset('custom/libs/cool-step/cool-step.js') }}"></script>
-
-<!-- Shareon Share js -->
-<script src="https://cdn.jsdelivr.net/npm/shareon@2/dist/shareon.iife.js" defer init></script>
-
-<!-- Components shopping cart js -->
-<script src="{{ asset('custom/js/components/components-cookies.js?a') }}"></script>
-<script src="{{ asset('custom/js/components/app/app-components-product-shopping-cart.js?1') }}"></script>
-
-<!-- Components like -->
-<script src="{{ asset('custom/js/components/app/app-components-product-like.js?j') }}" defer></script>
-
-<!-- Components location js -->
-<script src="{{ asset('custom/js/components/app-delivery-location.js?b') }}"></script>
-
-<!-- Components collapse when scroll -->
-<script src="{{ asset('custom/js/components/app-menu-collapser.js?a') }}"></script>
